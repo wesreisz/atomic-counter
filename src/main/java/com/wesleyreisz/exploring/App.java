@@ -15,12 +15,13 @@ public class App
     }
 
     public void run(){
-        AtomicCounter ac = new AtomicCounter(2);
-        int c = 2;
-        while(c>0) {
+        AtomicCounter ac = new AtomicCounter(10);
+        int c = 1892300;
+        while (c>0){
             ac.add();
-            c++;
+            c-=1;
         }
+
         ac.print();
 
     }
@@ -33,7 +34,8 @@ public class App
         public void add(){
             add(0,CarryOverEnum.NoCarryOverValue);
         }
-        private void add(int position, CarryOverEnum carryOverEnum){
+
+        private void add(int position, CarryOverEnum carryOverEnum) throws RuntimeException{
             if(position>=counter.length)
                 return;
 
@@ -46,6 +48,7 @@ public class App
                     add(position+1,CarryOverEnum.CarryOverValue);
                 else
                     throw new RuntimeException("Please resize the AtomicCounter");
+                //should this resize automatically, what strategy
             }else{
                 counter[position]=val;
                 return;
